@@ -1,315 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josua Berganio - UI & Graphic Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #00ff88;
+            --accent-secondary: #0099ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
 
-<!DOCTYPE HTML>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<html translate="no">
-	<head>
-		<title>Welcome to my Portfolio, Josua Berganio's Portfolio</title>
-		<meta name="google" content="notranslate">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="icon" href="images/logojosua1.png">
-	</head>
-	<body>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-		<!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo"><a href="index.html"><img src="images/logojosua1.png" alt="" /> </a></div>
-				<a href="#menu">Menu</a>
-			</header>
+        /* Gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="webdesign.html">Web Design</a></li>
-					<li><a href="logodesign.html">Logo Design</a></li>
-					<!--<li><a href="elements.html">Elements</a></li>-->
-				</ul>
-			</nav>
+        /* Custom cursor */
+        body {
+            cursor: none;
+        }
 
-		<!-- Banner -->
-			<section class="banner full">
-				<article>
-					<img src="images/slide01.jpg" alt="" />
-					<div class="inner">
-						<header>
-							<h2>Hello</h2>
-							<p>Hi! I'm Josua Berganio a Web and Graphic Designer. I specialize in <br>Branding and Web Designs and UI Designs from Philippines. </p>
+        .cursor {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            backdrop-filter: blur(2px);
+        }
 
-							
-							
-						</header>
-					</div>
-				</article>
-				<!--<article>
-					<img src="images/slide02.jpg" alt="" />
-					<div class="inner">
-						<header>
-							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
-							<h2>Magna etiam</h2>
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide03.jpg"  alt="" />
-					<div class="inner">
-						<header>
-							<p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
-							<h2>Tempus dolor</h2>
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide04.jpg"  alt="" />
-					<div class="inner">
-						<header>
-							<p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
-							<h2>Etiam feugiat</h2>
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide05.jpg"  alt="" />
-					<div class="inner">
-						<header>
-							<p>Ipsum dolor sed magna veroeros lorem ipsum</p>
-							<h2>Lorem adipiscing</h2>
-						</header>
-					</div>
-				</article>-->
-			</section>
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s cubic-bezier(0.75, 0, 0.25, 1);
+        }
 
-		
+        /* Header */
+        header {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            max-width: 90%;
+            width: 600px;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-		<!-- One -->
-			<section id="one" class="wrapper style2">
-				<div class="inner">
-						<header class="align-center">
-								<p class="special">Website i Design and Developed Using</p>
-								<h2>Wordpress</h2>
-							</header><br><br>
-					<div class="grid-style">
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
 
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img src="images/philsme1.jpg" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<p>Mediacom Solutions inc.</p>
-										<h2>Philippine SME Business Expo & Conference</h2>
-									</header>
-									<p> The Philippine SME Business Expo & Conference is a two-day business event dedicated to empowering Philippines' Small and Medium Enterprises.</p>
-									<footer class="align-center">
-										<a href="https://www.philsme.com/"  target="_blank" class="button alt">Check Site</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            animation: fadeIn 1s ease 0.3s both;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img src="images/babyexpo.jpg" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<p>Mediacom Solutions inc.</p>
-										<h2>Baby, Kids & Family Expo <br>Philippines</h2>
-									</header>
-									<p> Baby, Kids & Family Expo Philippines [BKFEP] is the country’s largest consumer and trade show for Baby, Kids, Maternity, Parenting and Family Products and Services,</p>
-									<footer class="align-center">
-										<a href="https://www.babyexpo.ph/" target="_blank" class="button alt">Check Site</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+        nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
 
-						<div>
-								<div class="box">
-									<div class="image fit">
-										<img src="images/apollo-academy.jpg" alt="" />
-									</div>
-									<div class="content">
-										<header class="align-center">
-											<p>Mediacom Solutions inc.</p>
-											<h2>Apollo Academy </h2>
-										</header>
-										<p> Apollo Academy was founded to answer the need by SMEs for a training and development platform to help grow their companies to the next level.</p>
-										<footer class="align-center">
-											<a href="https://apolloacademy.ph/" target="_blank" class="button alt">Check Site</a>
-										</footer>
-									</div>
-								</div>
-							</div>
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
 
-							<div>
-									<div class="box">
-										<div class="image fit">
-											<img src="images/babymart.jpg" alt="" />
-										</div>
-										<div class="content">
-											<header class="align-center">
-												<p>Mediacom Solutions inc.</p>
-												<h2>Babymart</h2>
-											</header>
-											<p> Babymart.ph is the country’s 1st online Baby Specialty Store and Same-Day Delivery Service. The idea of Babymart.ph was founded by Baby, Kids and Family Expo Philippines</p>
-											<footer class="align-center">
-												<a href="http://babymart.ph/" target="_blank" class="button alt">Check Site</a>
-											</footer>
-										</div>
-									</div>
-								</div>
+        nav a:hover {
+            color: var(--accent);
+        }
 
-								<div>
-										<div class="box">
-											<div class="image fit">
-												<img src="images/mybroker.jpg" alt="" />
-											</div>
-											<div class="content">
-												<header class="align-center">
-													<p>Smart Media Design</p>
-													<h2>MyBrokerbee </h2>
-												</header>
-												<p> A Toronto-based financial technology company – is focused on building the best digital workflow platform connecting the mortgage broker community with private money lenders.</p>
-												<footer class="align-center">
-													<a href="https://mybrokerbee.com/" target="_blank" class="button alt">Check Site</a>
-												</footer>
-											</div>
-										</div>
-									</div>
-		
-									<div>
-											<div class="box">
-												<div class="image fit">
-													<img src="images/cashin.jpg" alt="" />
-												</div>
-												<div class="content">
-													<header class="align-center">
-														<p>Smart Media Design</p>
-														<h2>Cashin Mortgages</h2>
-													</header>
-													<p> At Cashin Mortgages, constantly focus on personal development, improving their systems and upgrading technology that is truly the best to service.</p>
-													<footer class="align-center">
-														<a href="https://cashinmortgages.ca/" target="_blank" class="button alt">Check Site</a>
-													</footer>
-												</div>
-											</div>
-										</div>
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
 
-										<div>
-												<div class="box">
-													<div class="image fit">
-														<img src="images/greenbrix.jpg" alt="" />
-													</div>
-													<div class="content">
-														<header class="align-center">
-															<p>Smart Media Design</p>
-															<h2>Greenbrix Capital </h2>
-														</header>
-														<p> Tougher bank regulations have made it difficult for people to get a mortgage. Here at GreenBrix Capital we understand that there is a story behind every application.</p>
-														<footer class="align-center">
-															<a href="http://greenbrixcapital.com/" target="_blank" class="button alt">Check Site</a>
-														</footer>
-													</div>
-												</div>
-											</div>
-				
-											<div>
-													<div class="box">
-														<div class="image fit">
-															<img src="images/beverage.jpg" alt="" />
-														</div>
-														<div class="content">
-															<header class="align-center">
-																<p>Smart Media Design</p>
-																<h2>Beverage and water Solution</h2>
-															</header>
-															<p> As the world's population grows, so does the demand for and threat tot he planet's freshwater supply. Stanford researchers are developing a range of promising solutions to freshwater..</p>
-															<footer class="align-center">
-																<a href="http://beverageandwater.com/" target="_blank" class="button alt">Check Site</a>
-															</footer>
-														</div>
-													</div>
-												</div>
+        nav a:hover::after {
+            width: 100%;
+        }
 
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 101;
+        }
 
-					</div>
-					<div><footer class="align-center">
-							<a href="webdesign.html" class="button alt">See More</a>
-						</footer></div>
-				</div>
-			</section>
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
 
-			
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
 
-	<!--	 Two
-			<section id="two" class="wrapper style3">
-				<div class="inner">
-					<header class="align-center">
-						<p>Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-						<h2>Morbi maximus justo</h2>
-					</header>
-				</div>
-			</section>
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
 
-		Three 
-			<section id="three" class="wrapper style2">
-				<div class="inner">
-					<header class="align-center">
-						<p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-						<h2>Morbi maximus justo</h2>
-					</header>
-					<div class="gallery">
-						<div>
-							<div class="image fit">
-								<a href="#"><img src="images/pic01.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div>
-							<div class="image fit">
-								<a href="#"><img src="images/pic02.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div>
-							<div class="image fit">
-								<a href="#"><img src="images/pic03.jpg" alt="" /></a>
-							</div>
-						</div>
-						<div>
-							<div class="image fit">
-								<a href="#"><img src="images/pic04.jpg" alt="" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>-->
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
 
+        /* Mobile menu overlay */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/josua-berganio-070886141/" target="_blank" class="icon fa-linkedin"><span class="label">Twitter</span></a></li>
-						<li><a href="https://github.com/josuabergs" target="_blank" class="icon fa-github"><span class="label">Email</span></a></li>
-						<li><a href="https://www.behance.net/josuaberganio" target="_blank" class="icon fa-behance"><span class="label">Email</span></a></li>
-						<li><a href="https://www.facebook.com/josua21" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="mailto:josua.berganio@gmail.com" target="_blank" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					</ul>
-				</div>
-				<div class="copyright">
-					&copy; Josua Berganio's Portfolio. All rights reserved.
-				</div>
-			</footer>
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 2rem;
+        }
 
-	</body>
+        .mobile-menu nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active nav a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu.active nav a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active nav a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu.active nav a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu.active nav a:nth-child(4) { transition-delay: 0.25s; }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            header nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            header {
+                width: calc(100% - 2rem);
+                max-width: none;
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 2rem;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+            font-size: 79px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(60px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 4rem auto 0;
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        .stat {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Background decoration */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* Expertise Section */
+        .expertise {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .expertise h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 5rem auto 0;
+        }
+
+        .expertise-item {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .expertise-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15);
+        }
+
+        .expertise-item:nth-child(1) { animation-delay: 0.1s; }
+        .expertise-item:nth-child(2) { animation-delay: 0.2s; }
+        .expertise-item:nth-child(3) { animation-delay: 0.3s; }
+        .expertise-item:nth-child(4) { animation-delay: 0.4s; }
+        .expertise-item:nth-child(5) { animation-delay: 0.5s; }
+        .expertise-item:nth-child(6) { animation-delay: 0.6s; }
+
+        .expertise-item h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .expertise-item p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Projects */
+        .projects {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .project-list {
+            margin-top: 5rem;
+        }
+
+        .project {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .project:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15);
+        }
+
+        .project-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .project-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+        }
+
+        .project-content h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Ventures */
+        .ventures {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .ventures h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .ventures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .venture-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .venture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 153, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .venture-card:hover::before {
+            opacity: 1;
+        }
+
+        .venture-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 30px 80px rgba(0, 255, 136, 0.2);
+        }
+
+        .venture-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .venture-card .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .venture-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .venture-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .venture-link:hover {
+            gap: 1rem;
+        }
+
+        /* Portfolio */
+        .portfolio {
+            padding: 8rem 2rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .portfolio h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 255, 136, 0.15);
+            border-color: var(--accent);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.95) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-item:hover .portfolio-overlay h3 {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay p {
+            transform: translateY(0);
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+
+        .portfolio-item:hover .portfolio-tags {
+            transform: translateY(0);
+        }
+
+        .portfolio-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .portfolio-overlay {
+                opacity: 1;
+                background: linear-gradient(180deg, rgba(10, 10, 10, 0) 40%, rgba(10, 10, 10, 0.95) 100%);
+            }
+
+            .portfolio-overlay h3,
+            .portfolio-overlay p,
+            .portfolio-tags {
+                transform: translateY(0);
+            }
+        }
+
+        /* Contact */
+        .contact {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .contact > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .contact-email {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-block;
+            padding: 1.25rem 3rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .contact-email:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                width: calc(100% - 2rem);
+                max-width: none;
+                padding: 0.75rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero, .expertise, .projects, .ventures, .contact {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .ventures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .project:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ventures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .venture-card {
+                min-width: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <div class="logo">JOSUA B.</div>
+        <nav>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#work">Work</a>
+            <a href="#ventures">Ventures</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <nav>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#work">Work</a>
+            <a href="#ventures">Ventures</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Josua Berganio<br><span class="gradient-text">UI & Graphic Designer</span></h1>
+            <p class="hero-subtitle">Crafting dynamic, beautiful digital experiences that actually connect with people. Specializing in transforming ideas into visually compelling designs across web, mobile, and brand identity.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Companies Served</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="expertise">
+        <div class="section-label">What I Do</div>
+        <h2>Creating designs that don't just look good—they work hard for your business.</h2>
+        
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <h3>UI/UX Design</h3>
+                <p>Designing intuitive interfaces for web and mobile applications with responsive layouts that adapt beautifully to any screen. Creating interactive prototypes that bring concepts to life.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Brand & Identity</h3>
+                <p>Logo design and complete brand profile development. Building visual identity systems that tell your story with brand guidelines that keep everything cohesive.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Digital Marketing</h3>
+                <p>Social media graphics that stop the scroll, Google Ads banners optimized for conversion, and product mockups that showcase your offerings effectively.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Web Design</h3>
+                <p>Creating engaging websites that balance aesthetics with functionality. Proficient in designing for various platforms and ensuring consistency across all digital touchpoints.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Print & Packaging</h3>
+                <p>Print media design for traditional marketing, packaging and promotional materials, plus illustration work that adds personality to your brand.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Email Campaigns</h3>
+                <p>Designing compelling email campaign layouts and product mockup designs that drive engagement and conversions across digital channels.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="section-label">Selected Work</div>
+        <h2>Portfolio Showcase</h2>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=800&fit=crop" alt="Brand Identity Design" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>Brand Identity Design</h3>
+                    <p>Comprehensive brand identity system including logo, color palette, and brand guidelines</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Branding</span>
+                        <span class="portfolio-tag">Illustrator</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&h=800&fit=crop" alt="E-commerce Website" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>E-commerce Website</h3>
+                    <p>Modern e-commerce platform with seamless shopping experience and responsive design</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">UI/UX</span>
+                        <span class="portfolio-tag">Figma</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=800&fit=crop" alt="Marketing Campaign" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>Marketing Campaign</h3>
+                    <p>Multi-channel marketing campaign with social media assets, email templates, and banner ads</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Graphics</span>
+                        <span class="portfolio-tag">Photoshop</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=800&fit=crop" alt="Mobile App Design" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>Mobile App Design</h3>
+                    <p>Intuitive mobile app interface with user-centered design and seamless interactions</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">UI Design</span>
+                        <span class="portfolio-tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&h=800&fit=crop" alt="Packaging Design" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>Packaging Design</h3>
+                    <p>Eye-catching product packaging that stands out on shelves and connects with consumers</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Print</span>
+                        <span class="portfolio-tag">Packaging</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop" alt="Dashboard Design" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>Dashboard Design</h3>
+                    <p>Data visualization dashboard with clean interface and actionable insights</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">UI/UX</span>
+                        <span class="portfolio-tag">Data Viz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="work">
+        <div class="section-label">Experience</div>
+        <h2>Featured Work</h2>
+        
+        <div class="project-list">
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">01</div>
+                    <div class="project-category">Current · UI/UX</div>
+                </div>
+                <div class="project-content">
+                    <h3>WISE Digital Partners</h3>
+                    <p>UI/UX Designer working on website design and daily ad hoc design requests. Collaborating with cross-functional teams to translate requirements into intuitive, user-friendly interfaces using Figma for wireframing, UI design, and prototyping.</p>
+                    <div class="project-tags">
+                        <span class="tag">UI/UX Design</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">Wireframing</span>
+                        <span class="tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">02</div>
+                    <div class="project-category">2025-2026 · Design</div>
+                </div>
+                <div class="project-content">
+                    <h3>Purplepatch Services</h3>
+                    <p>Web and Graphic Designer creating comprehensive brand profiles, logo designs, and marketing materials. Developed Google Ads banners, email campaigns, product mockups, and social media graphics for diverse clients.</p>
+                    <div class="project-tags">
+                        <span class="tag">Adobe Illustrator</span>
+                        <span class="tag">Adobe Photoshop</span>
+                        <span class="tag">Logo Design</span>
+                        <span class="tag">Brand Profiles</span>
+                        <span class="tag">Email Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">03</div>
+                    <div class="project-category">2024-2025 · Marketing</div>
+                </div>
+                <div class="project-content">
+                    <h3>Fenyx</h3>
+                    <p>Graphic Designer collaborating with marketing teams to produce client concepts and collateral materials. Created designs for promotional items across social media and print platforms.</p>
+                    <div class="project-tags">
+                        <span class="tag">Graphic Design</span>
+                        <span class="tag">Social Media</span>
+                        <span class="tag">Print Design</span>
+                        <span class="tag">Marketing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">04</div>
+                    <div class="project-category">2020-2021 · Web Development</div>
+                </div>
+                <div class="project-content">
+                    <h3>Johnsen 360</h3>
+                    <p>Developed concepts, graphics and layouts for product illustration, company logos, and websites. Designed UI for applications and websites including Johnsen 360 and Johnsen Global platforms, plus packaging for brand Locally.</p>
+                    <div class="project-tags">
+                        <span class="tag">Web Design</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">WordPress</span>
+                        <span class="tag">Packaging</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">05</div>
+                    <div class="project-category">2019-2020 · Agency</div>
+                </div>
+                <div class="project-content">
+                    <h3>MEDIACOM Solutions Inc.</h3>
+                    <p>Conceptualized designs for social media and marketing collaterals across various brands. Created outputs for social media, websites, mobile apps including Philsme Website, Apollo Academy, and Babyexpo marketing materials.</p>
+                    <div class="project-tags">
+                        <span class="tag">Social Media</span>
+                        <span class="tag">Web Design</span>
+                        <span class="tag">Mobile Apps</span>
+                        <span class="tag">Branding</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-meta">
+                    <div class="project-number">06</div>
+                    <div class="project-category">2016-2019 · Digital</div>
+                </div>
+                <div class="project-content">
+                    <h3>Smart Media Development</h3>
+                    <p>Created designs for different screen types and media platforms. Developed concepts, graphics and layouts for client websites including MyBrokerBee, Beverage and Water Solutions, and GreenBrix Capital.</p>
+                    <div class="project-tags">
+                        <span class="tag">Multi-Platform</span>
+                        <span class="tag">Web Design</span>
+                        <span class="tag">Graphics</span>
+                        <span class="tag">Client Work</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ventures" id="ventures">
+        <div class="section-label">Portfolio & Tools</div>
+        <h2>My Toolkit & Approach</h2>
+        
+        <div class="ventures-grid">
+            <div class="venture-card">
+                <h3>Design Tools</h3>
+                <p class="subtitle">Professional Software</p>
+                <p>Adobe Creative Suite (Photoshop, Illustrator, InDesign) for professional design work, Figma for collaborative UI/UX projects, and Canva for quick-turnaround marketing assets.</p>
+                <a href="https://www.behance.net/josuaberganio" target="_blank" class="venture-link">View Behance →</a>
+            </div>
+            
+            <div class="venture-card">
+                <h3>My Approach</h3>
+                <p class="subtitle">Design Philosophy</p>
+                <p>Great design happens at the intersection of creativity and strategy. Every project starts with understanding your goals and audience, crafting solutions that are visually stunning and strategically sound.</p>
+                <a href="http://josuabergs.github.io/" target="_blank" class="venture-link">View Portfolio →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-label" style="color: var(--accent);">Get In Touch</div>
+        <h2>Let's Create<br>Something Amazing</h2>
+        <p>Available for design projects, collaborations, and freelance opportunities.</p>
+        <a href="/cdn-cgi/l/email-protection#bfdcd0d1cbdedccbffd5d0cccadedddacdd8ded1d6d091dcd0d2" class="contact-email"><span class="__cf_email__" data-cfemail="75161a1b01141601351f1a06001417100712141b1c1a5b161a18">[email&#160;protected]</span></a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://www.behance.net/josuaberganio" target="_blank">Behance</a>
+                <a href="http://josuabergs.github.io/" target="_blank">Portfolio</a>
+                <a href="https://www.linkedin.com/in/josuaberganio" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/josuaberganio" target="_blank">Instagram</a>
+            </div>
+            <div class="copyright">© 2026 Josua Berganio. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.project, .venture-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu nav a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
 </html>
